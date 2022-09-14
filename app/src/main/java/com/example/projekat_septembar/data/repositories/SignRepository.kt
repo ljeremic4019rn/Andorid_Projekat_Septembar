@@ -5,5 +5,6 @@ import io.reactivex.Observable
 
 interface SignRepository {
 
-    fun userAuth(username:String, password:String): Observable<UserDetails>
+    fun signIn(username:String, password:String): Observable<UserDetails>
+    fun signUp(firstname:String, lastname:String, mobile:Long, country:String): Observable<String>
 }

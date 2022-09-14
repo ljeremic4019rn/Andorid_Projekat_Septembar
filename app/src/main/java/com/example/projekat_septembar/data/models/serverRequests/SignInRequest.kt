@@ -1,4 +1,4 @@
-package com.example.projekat_septembar.data.models
+package com.example.projekat_septembar.data.models.serverRequests
 
 import com.squareup.moshi.JsonClass
 

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/firstNameEt"
         android:layout_width="321dp"
         android:layout_height="49dp"
         android:layout_marginTop="60dp"
@@ -31,46 +31,46 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/lastNameEt"
         android:layout_width="323dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint=" lastname"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameEt"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/firstNameEt"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEt" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/phoneEt"
         android:layout_width="327dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="phone"
         android:hint=" phone_number"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEt"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/lastNameEt"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameEt" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/countryEt"
         android:layout_width="326dp"
         android:layout_height="42dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint=" country"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
+        app:layout_constraintEnd_toEndOf="@+id/phoneEt"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+        app:layout_constraintStart_toStartOf="@+id/phoneEt"
+        app:layout_constraintTop_toBottomOf="@+id/phoneEt" />
 
     <Button
-        android:id="@+id/btnSignUp"
+        android:id="@+id/btnSignUpServer"
         android:layout_width="325dp"
         android:layout_height="54dp"
         android:backgroundTint="@color/cardview_dark_background"
@@ -79,7 +79,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/countryEt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,14 @@
 package com.example.projekat_septembar.data.models.serverResponses
 
+import com.example.projekat_septembar.data.models.serverRequests.SignUpRequest
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SignUpResponse(
-    val data: Data,
+    val Data: SignUpRequest,
     val Message: String,
     val UserId: String,
-    val CreatedAt: Int,
+    val CreatedAt: Long,
     val NextSteps: String,
     val EmailValidation: String,
     val Subscribed: Boolean,

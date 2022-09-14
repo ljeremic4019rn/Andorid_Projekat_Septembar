@@ -18,9 +18,8 @@ class SignInActivity : AppCompatActivity() {
     private val signViewModel: SignContract.SignViewModel by viewModel<SignViewModel>()
     private lateinit var binding: ActivitySignInBinding
 
-    var username: String = ""
+    private var username: String = ""
     private var password: String = ""
-    private lateinit var save: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +34,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun initView(){
-        val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
-        save = sharedPreferences.edit()
-
         binding.btnSignIn.setOnClickListener{
             username = binding.inputUsername.text.toString()
             password = binding.inputPassword.text.toString()
@@ -49,7 +45,7 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSignUp.setOnClickListener{
+        binding.btnSignUpTransfer.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
@@ -61,16 +57,14 @@ class SignInActivity : AppCompatActivity() {
             Timber.e(it.toString())
             startMainActivity(it)
         }
-
-
     }
 
     private fun startMainActivity(state: SignInState) {
         when (state) {
             is SignInState.Success -> {
+
+                println("successful sigh in")
                 Toast.makeText(this, "Successfully logged in", Toast.LENGTH_LONG).show()
-                save.putString("username", state.signInResponse.userName)
-                save.apply()
 
                 val intent = Intent(this, SplashActivity::class.java)//todo popravi da se pojavi splash
                 startActivity(intent)
@@ -83,8 +77,6 @@ class SignInActivity : AppCompatActivity() {
             is SignInState.DataFetched -> {
                 Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_LONG)
                     .show()
-            }
-            is SignInState.Loading -> {
             }
         }
     }

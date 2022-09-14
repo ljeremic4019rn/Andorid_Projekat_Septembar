@@ -14,7 +14,7 @@ val signInModule = module {
 
     viewModel { SignViewModel(signRepository = get()) }
 
-    single<SignRepository> { SignRepoImpl(signInDataSource = get()) }
+    single<SignRepository> { SignRepoImpl(signDataSource = get()) }
 
     single<SignDataSource> { create(retrofit = get()) }
 
