@@ -39,19 +39,18 @@ class MainActivity: AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
+
         initViewPager()
         initNavigation()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {//stavljamo onclick za gornje desno logout dugme
         R.id.logoutBtn -> {
-            val sharedPreferences = getSharedPreferences(packageName, MODE_PRIVATE)
-
-            sharedPreferences
-                .edit()
-                .putBoolean("rememberMe", false)
-                .apply()
-
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
