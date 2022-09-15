@@ -4,7 +4,9 @@ import com.example.projekat_septembar.data.datasources.local.CarDao
 import com.example.projekat_septembar.data.datasources.remote.CarDataSource
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.data.models.CarEntity
+import com.example.projekat_septembar.data.models.Resource
 import com.example.projekat_septembar.data.models.SellerDetails
+import com.example.projekat_septembar.data.models.serverRequests.ContactSellerRequest
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -30,7 +32,7 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
             }
     }
 
-    override fun contactSeller(id: Long): Observable<SellerDetails> {
+    override fun getSeller(id: Long): Observable<SellerDetails> {
         return remoteDataSource
             .getSeller("api/users/$id")
             .map {
@@ -41,6 +43,14 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
                     avatar = it.User.avatar,
                     email = it.User.email,
                 )
+            }
+    }
+
+    override fun contactSeller(firstname: String, lastname: String, message: String, contact: Int): Observable<Resource<Unit>> {
+        return remoteDataSource
+            .contactSeller(ContactSellerRequest(firstname, lastname, message, contact))
+            .map {
+                Resource.Success(Unit)
             }
     }
 

@@ -19,6 +19,6 @@ interface CarDataSource {
     fun getSeller(@Url url: String?): Observable<GetSellerResponse>
 
     @POST("api/contactus")
-    fun contactSeller(@Body contactSellerRequest: ContactSellerRequest): Observable<GetSellerResponse>
+    fun contactSeller(@Body contactSellerRequest: ContactSellerRequest): Observable<Any>
 
 }

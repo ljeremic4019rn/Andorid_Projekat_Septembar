@@ -16,6 +16,7 @@ interface CarContract {
 
         fun saveCar(car: Car)
         fun getSeller(id: Long)
+        fun contactSeller(firstname: String, lastname: String, message: String, contact: Int)
         fun fetchAllCarsFromServer()
         fun loadPagination(initial: Boolean)
 

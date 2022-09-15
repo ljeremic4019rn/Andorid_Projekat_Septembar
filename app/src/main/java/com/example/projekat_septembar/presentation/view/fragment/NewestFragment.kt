@@ -126,13 +126,12 @@ class NewestFragment: Fragment() {
         if (it.resultCode == Activity.RESULT_OK) {
             val data = it.data!!
 
-
-            println("kurac")
-            println( data.getStringExtra("name")!!)
-            println( data.getStringExtra("lastname")!!)
-            println( data.getIntExtra("phone",0))
-
-
+            carViewModel.contactSeller(
+                data.getStringExtra("name")!!,
+                data.getStringExtra("lastname")!!,
+                "Can I get discount for your car?",
+                data.getIntExtra("phone",0)
+            )
         }
     }
 
@@ -169,6 +168,9 @@ class NewestFragment: Fragment() {
                 println("Loading")
             }
             is CarState.Saved -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
+            is CarState.Contacted -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
         }

@@ -3,6 +3,7 @@ package com.example.projekat_septembar.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projekat_septembar.data.models.Car
+import com.example.projekat_septembar.data.models.Resource
 import com.example.projekat_septembar.data.models.SellerDetails
 import com.example.projekat_septembar.data.repositories.CarRepository
 import com.example.projekat_septembar.presentation.contract.CarContract
@@ -75,7 +76,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
 
     override fun getSeller(id: Long) {
         val subscription = carRepository
-            .contactSeller(id)
+            .getSeller(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -86,6 +87,26 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
                     Timber.e(it)
                 }
             )
-        subscriptions.add(subscription)    }
+        subscriptions.add(subscription)
+    }
+
+    override fun contactSeller(firstname: String, lastname: String, message: String, contact: Int) {
+        val subscription = carRepository
+            .contactSeller(firstname, lastname, message, contact)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    when(it) {
+                        is Resource.Success -> carState.value = CarState.Contacted("Message sent to seller")
+                        is Resource.Error -> carState.value = CarState.Error("Error happened while fetching data from the server")
+                    }
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
 
 }
