@@ -75,39 +75,43 @@ class NewestFragment: Fragment() {
     }
 
 
-    private fun openDetailed(employee: Car){//todo on click
-//        val builder = AlertDialog.Builder(activity,R.style.CustomAlertDialog).create()
-//        val view = layoutInflater.inflate(R.layout.options_dialog_box,null)
-//
-//        val  cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
-//        val  okBtn = view.findViewById<Button>(R.id.okBtn)
-//        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupEmployees)
-//
-//        builder.setView(view)
-//
-//        cancelBtn.setOnClickListener {
-//            builder.dismiss()
-//        }
-//
-//        okBtn.setOnClickListener {
-//            val radioButton =view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-//
-//            if (radioButton == null) {
-//                Toast.makeText(context, "Please select option", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            when(radioButton.text.toString()){
-//                "Delete employee" -> employeeViewModel.deleteEmployee(employee.id)
-//                "Employee details" -> employeeViewModel.detailedEmployee(employee.id)
-//                "Update employee" -> startUpdateActivity(employee.id)
-//                else -> println("error")
-//            }
-//            builder.dismiss()
-//        }
-//
-//        builder.setCanceledOnTouchOutside(false)
-//        builder.show()
+    private fun openDetailed(car: Car){
+        if (!car.availability){
+            Toast.makeText(context, "Car is not available", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val builder = AlertDialog.Builder(activity,R.style.CustomAlertDialog).create()
+        val view = layoutInflater.inflate(R.layout.options_dialog_box,null)
+
+        val  cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
+        val  okBtn = view.findViewById<Button>(R.id.okBtn)
+        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupEmployees)
+
+        builder.setView(view)
+
+        cancelBtn.setOnClickListener {
+            builder.dismiss()
+        }
+
+        okBtn.setOnClickListener {
+            val radioButton =view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+
+            if (radioButton == null) {
+                Toast.makeText(context, "Please select option", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            when(radioButton.text.toString()){
+                "Contact seller" -> println("contact button")
+                "Save" -> println("save button")
+                else -> println("error")
+            }
+            builder.dismiss()
+        }
+
+        builder.setCanceledOnTouchOutside(false)
+        builder.show()
     }
 
     private fun startUpdateActivity(id: Long) {
