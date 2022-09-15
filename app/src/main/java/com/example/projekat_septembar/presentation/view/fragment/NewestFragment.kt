@@ -167,6 +167,9 @@ class NewestFragment: Fragment() {
             is CarState.Loading -> {
                 println("Loading")
             }
+            is CarState.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
             is CarState.Saved -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }

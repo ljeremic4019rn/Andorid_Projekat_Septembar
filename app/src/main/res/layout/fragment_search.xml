@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRv"
         android:layout_width="408dp"
-        android:layout_height="532dp"
+        android:layout_height="500dp"
         android:scrollbarSize="25dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,6 +81,16 @@
             android:layout_weight="1"
             android:buttonTint="#1A99C4"
             android:text="@string/search_by_color"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="54dp" />
+
+        <RadioButton
+            android:id="@+id/yearRb"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:buttonTint="#1A99C4"
+            android:text="@string/search_by_year"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="54dp" />
     </RadioGroup>

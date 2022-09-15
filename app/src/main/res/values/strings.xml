@@ -28,4 +28,5 @@
     <string name="search_by_name">Search by name</string>
     <string name="search_by_model">Search by model</string>
     <string name="search_by_color">Search by color</string>
+    <string name="search_by_year">Search by year</string>
 </resources>
