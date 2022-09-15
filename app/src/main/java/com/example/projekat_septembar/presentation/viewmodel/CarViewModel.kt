@@ -97,7 +97,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    carState.value = CarState.LocalSuccess(it)
+                    carState.value = CarState.LocalSuccess(it.reversed())
                 },
                 {
                     carState.value = CarState.Error("Error happened while getting data from database")
