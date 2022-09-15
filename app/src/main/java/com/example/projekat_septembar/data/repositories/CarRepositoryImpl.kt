@@ -3,7 +3,9 @@ package com.example.projekat_septembar.data.repositories
 import com.example.projekat_septembar.data.datasources.local.CarDao
 import com.example.projekat_septembar.data.datasources.remote.CarDataSource
 import com.example.projekat_septembar.data.models.Car
+import com.example.projekat_septembar.data.models.CarEntity
 import com.example.projekat_septembar.data.models.Resource
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 class CarRepositoryImpl (private val localDataSource: CarDao, private val remoteDataSource: CarDataSource) : CarRepository {
@@ -28,5 +30,17 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
             }
     }
 
+    override fun saveCarToDb(car: Car): Completable {
+        return localDataSource.insert(CarEntity(
+            car.id,
+            car.car,
+            car.car_model,
+            car.car_color,
+            car.car_model_year,
+            car.car_vin,
+            car.price,
+            car.availability,
+            ))
+    }
 
 }

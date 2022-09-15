@@ -1,7 +1,6 @@
 package com.example.projekat_septembar.presentation.view.fragment
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -31,7 +30,7 @@ import timber.log.Timber
 class NewestFragment: Fragment() {
 
 
-    private val employeeViewModel: CarContract.ViewModel by sharedViewModel<CarViewModel>()
+    private val carViewModel: CarContract.ViewModel by sharedViewModel<CarViewModel>()
     private var _binding: FragmentNewestBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: CarAdapter
@@ -67,7 +66,7 @@ class NewestFragment: Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)){
-                    employeeViewModel.loadPagination(false)
+                    carViewModel.loadPagination(false)
                     Toast.makeText(context, "Loading more cars", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -86,7 +85,7 @@ class NewestFragment: Fragment() {
 
         val  cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
         val  okBtn = view.findViewById<Button>(R.id.okBtn)
-        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupEmployees)
+        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
 
         builder.setView(view)
 
@@ -104,7 +103,7 @@ class NewestFragment: Fragment() {
 
             when(radioButton.text.toString()){
                 "Contact seller" -> println("contact button")
-                "Save" -> println("save button")
+                "Save" -> carViewModel.saveCar(car)
                 else -> println("error")
             }
             builder.dismiss()
@@ -135,32 +134,34 @@ class NewestFragment: Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initObservers() {
-        employeeViewModel.carState.observe(viewLifecycleOwner) { carState ->
+        carViewModel.carState.observe(viewLifecycleOwner) { carState ->
             Timber.e(carState.toString())
             renderState(carState)
         }
 
-        employeeViewModel.paginationList.observe(viewLifecycleOwner) {
+        carViewModel.paginationList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
         }
 
-        employeeViewModel.fetchAllCarsFromServer()
+        carViewModel.fetchAllCarsFromServer()
     }
 
 
     private fun renderState(state: CarState) {
         when (state) {
             is CarState.Success -> {
-//                adapter.submitList(state.cars)
-                employeeViewModel.allCars = state.cars
-                employeeViewModel.loadPagination(true)
+                carViewModel.allCars = state.cars
+                carViewModel.loadPagination(true)
             }
             is CarState.DataFetched -> {
                 Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_SHORT).show()
             }
             is CarState.Loading -> {
                 println("Loading")
+            }
+            is CarState.Saved -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -16,6 +16,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
     private val subscriptions = CompositeDisposable()
     override val carState: MutableLiveData<CarState> = MutableLiveData()
     override val paginationList: MutableLiveData<List<Car>> = MutableLiveData()
+
     override var allCars: List<Car> = arrayListOf()
     private var size = 0
 
@@ -37,7 +38,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
         subscriptions.add(subscription)
     }
 
-    override fun loadPagination(initial: Boolean) {
+    override fun loadPagination(initial: Boolean) {//todo ova funkija je ista kao kod krstica mozda posumnja da je kopirano, Mladenova odluka
         val tmpArrayList: ArrayList<Car> = arrayListOf()
         when {
             initial -> size = 9
@@ -53,5 +54,21 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
             paginationList.value = tmpArrayList
         }
     }
+
+    override fun saveCar(car: Car) {
+        val subscription = carRepository
+            .saveCarToDb(car)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    carState.value = CarState.Saved("Car has been saved")
+                    Timber.e("Saved Car")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)    }
 
 }

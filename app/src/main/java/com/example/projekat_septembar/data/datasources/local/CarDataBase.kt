@@ -13,5 +13,5 @@ import com.example.projekat_septembar.data.models.CarEntity
 )
 @TypeConverters()
 abstract class CarDataBase : RoomDatabase() {
-    abstract fun getEmployeeDao(): CarDao
+    abstract fun getCarDao(): CarDao
 }

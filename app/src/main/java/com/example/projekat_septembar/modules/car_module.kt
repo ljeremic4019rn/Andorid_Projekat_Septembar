@@ -14,7 +14,7 @@ val car_module = module {
 
     single<CarRepository> { CarRepositoryImpl(localDataSource = get(), remoteDataSource = get()) }
 
-    single { get<CarDataBase>().getEmployeeDao() }
+    single { get<CarDataBase>().getCarDao() }
 
     single<CarDataSource> { create(retrofit = get()) }
 

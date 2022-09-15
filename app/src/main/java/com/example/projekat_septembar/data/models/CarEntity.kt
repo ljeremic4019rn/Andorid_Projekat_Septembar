@@ -12,6 +12,6 @@ data class CarEntity(
     val car_color: String,
     val car_model_year: Int,
     val car_vin: String,
-    val price: Double,
+    val price: String,
     val availability: Boolean,
 )

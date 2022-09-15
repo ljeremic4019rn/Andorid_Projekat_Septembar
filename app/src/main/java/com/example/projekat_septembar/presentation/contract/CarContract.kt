@@ -12,7 +12,7 @@ interface CarContract {
         val paginationList: MutableLiveData<List<Car>>
 
 
-
+        fun saveCar(car: Car)
         fun fetchAllCarsFromServer()
         fun loadPagination(initial: Boolean)
 

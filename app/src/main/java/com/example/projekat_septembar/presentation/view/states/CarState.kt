@@ -8,5 +8,6 @@ sealed class CarState {
     object DataFetched: CarState()
     object Loading: CarState()
     data class Success(val cars: List<Car>): CarState()
+    data class Saved(val message: String): CarState()
     data class Error(val message: String): CarState()
 }
