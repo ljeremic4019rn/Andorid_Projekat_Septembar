@@ -60,7 +60,7 @@ class NewestFragment: Fragment() {
 
     private fun initRecycler() {
         binding.carRv.layoutManager = LinearLayoutManager(context)
-        adapter = CarAdapter(::openDetailed)//callback za on click
+        adapter = CarAdapter(::onItemClick)//callback za on click
         binding.carRv.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         binding.carRv.adapter = adapter
 
@@ -77,7 +77,7 @@ class NewestFragment: Fragment() {
     }
 
 
-    private fun openDetailed(car: Car){
+    private fun onItemClick(car: Car){
         if (!car.availability){
             Toast.makeText(context, "Car is not available", Toast.LENGTH_SHORT).show()
             return
@@ -168,9 +168,6 @@ class NewestFragment: Fragment() {
                 println("Loading")
             }
             is CarState.Error -> {
-                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
-            }
-            is CarState.Saved -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
             is CarState.Contacted -> {

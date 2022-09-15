@@ -13,11 +13,14 @@ interface CarContract {
         val paginationList: MutableLiveData<List<Car>>
         val contactedSeller: LiveData<SellerDetails>
 
-        fun saveCar(car: Car)
         fun getSeller(id: Long)
         fun contactSeller(firstname: String, lastname: String, message: String, contact: Int)
         fun fetchAllCarsFromServer()
         fun loadPagination(initial: Boolean)
         fun search(type: String, key: String)
+
+        fun getAll()
+        fun deleteCar(carId: Long)
+        fun saveCar(car: Car)
     }
 }

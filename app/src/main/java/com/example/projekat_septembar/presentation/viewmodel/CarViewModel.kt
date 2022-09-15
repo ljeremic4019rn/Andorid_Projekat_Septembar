@@ -90,6 +90,40 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
         subscriptions.add(subscription)
     }
 
+    override fun getAll() {
+        val subscription = carRepository
+            .getAllCars()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    carState.value = CarState.LocalSuccess(it)
+                },
+                {
+                    carState.value = CarState.Error("Error happened while getting data from database")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun deleteCar(carId: Long){
+        val subscription = carRepository
+            .deleteById(carId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("DELETED")
+
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun getSeller(id: Long) {
         val subscription = carRepository
             .getSeller(id)

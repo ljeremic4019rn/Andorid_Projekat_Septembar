@@ -1,18 +1,14 @@
 package com.example.projekat_septembar.presentation.view.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.databinding.FragmentSearchBinding
 import com.example.projekat_septembar.presentation.contract.CarContract
@@ -50,12 +46,12 @@ class SearchFragment : Fragment() {
 
     private fun initRecycler() {
         binding.searchRv.layoutManager = LinearLayoutManager(context)
-        adapter = CarAdapter(::openDetailed)
+        adapter = CarAdapter(::onItemClick)
         binding.searchRv.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         binding.searchRv.adapter = adapter
     }
 
-    private fun openDetailed(car: Car){//iskoriscen je isti adapter za sve RV zato je ovo prazno
+    private fun onItemClick(car: Car){//iskoriscen je isti adapter za sve RV zato je ovo prazno
     }
 
     private fun initView() {

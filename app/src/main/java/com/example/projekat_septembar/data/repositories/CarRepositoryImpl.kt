@@ -13,7 +13,6 @@ import timber.log.Timber
 
 class CarRepositoryImpl (private val localDataSource: CarDao, private val remoteDataSource: CarDataSource) : CarRepository {
 
-
     override fun fetchAllFromServer(): Observable<List<Car>> {
         return remoteDataSource
             .fetchAll()
@@ -97,6 +96,29 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
             car.price,
             car.availability,
             ))
+    }
+
+    override fun getAllCars(): Observable<List<Car>> {
+        return localDataSource
+            .getAll()
+            .map { it ->
+                it.map {
+                    Car(
+                        it.id,
+                        it.car,
+                        it.car_model,
+                        it.car_color,
+                        it.car_model_year,
+                        it.car_vin,
+                        it.price,
+                        it.availability,
+                    )
+                }
+            }
+    }
+
+    override fun deleteById(id: Long): Completable {
+        return localDataSource.deleteById(id)
     }
 
 }

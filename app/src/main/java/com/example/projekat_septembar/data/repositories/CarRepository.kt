@@ -14,4 +14,7 @@ interface CarRepository {
     fun search(type: String, key: String): Observable<List<Car>>
 
     fun saveCarToDb(car: Car): Completable
+    fun getAllCars(): Observable<List<Car>>
+    fun deleteById(id: Long): Completable
+
 }

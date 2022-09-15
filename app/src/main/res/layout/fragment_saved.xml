@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savedRv"
-        android:layout_width="409dp"
-        android:layout_height="640dp"
+        android:layout_width="399dp"
+        android:layout_height="638dp"
         android:scrollbarSize="25dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

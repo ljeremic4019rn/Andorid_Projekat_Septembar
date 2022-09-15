@@ -16,4 +16,7 @@ abstract class CarDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(carEntity: CarEntity): Completable
+
+    @Query("DELETE FROM cars WHERE id == :id")
+    abstract fun deleteById(id: Long): Completable
 }
