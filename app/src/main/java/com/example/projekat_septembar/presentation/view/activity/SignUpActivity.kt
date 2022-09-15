@@ -67,7 +67,7 @@ class SignUpActivity : AppCompatActivity() {
             is SignUpState.Success -> {
 
                 println("successful sigh up")
-                Toast.makeText(this, state.singUpResponse, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, state.singUpResponse, Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
@@ -78,7 +78,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Wrong data entered", Toast.LENGTH_SHORT).show()
             }
             is SignUpState.DataFetched -> {
-                Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_SHORT)
                     .show()
             }
         }

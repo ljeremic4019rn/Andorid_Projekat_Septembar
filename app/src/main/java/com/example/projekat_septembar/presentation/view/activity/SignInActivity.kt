@@ -64,7 +64,7 @@ class SignInActivity : AppCompatActivity() {
             is SignInState.Success -> {
 
                 println("successful sigh in")
-                Toast.makeText(this, "Successfully logged in", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Successfully logged in", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, SplashActivity::class.java)//todo popravi da se pojavi splash
                 startActivity(intent)
@@ -75,7 +75,7 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this, "Wrong data entered", Toast.LENGTH_SHORT).show()
             }
             is SignInState.DataFetched -> {
-                Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_SHORT)
                     .show()
             }
         }

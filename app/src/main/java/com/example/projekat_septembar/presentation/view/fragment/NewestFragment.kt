@@ -52,7 +52,6 @@ class NewestFragment: Fragment() {
     }
 
     private fun init() {
-        employeeViewModel.fetchAllCarsFromServer()
         initRecycler()
         initObservers()
     }
@@ -64,14 +63,15 @@ class NewestFragment: Fragment() {
         binding.carRv.adapter = adapter
 
 
-//        binding.carRv.addOnScrollListener(object : RecyclerView.OnScrollListener() { todo paginacija
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (!recyclerView.canScrollVertically(1)){
-//                    employeeViewModel.load10Employees(false)
-//                }
-//            }
-//        })
+        binding.carRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)){
+                    employeeViewModel.loadPagination(false)
+                    Toast.makeText(context, "Loading more cars", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
 
@@ -133,26 +133,28 @@ class NewestFragment: Fragment() {
 //        }
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged")
     private fun initObservers() {
         employeeViewModel.carState.observe(viewLifecycleOwner) { carState ->
             Timber.e(carState.toString())
             renderState(carState)
         }
 
-//        employeeViewModel.gradualRvList.observe(viewLifecycleOwner) {
-//            adapter.submitList(it)
-//            adapter.notifyDataSetChanged()
-//        }
-//
-//        employeeViewModel.getAllEmployees()
+        employeeViewModel.paginationList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+            adapter.notifyDataSetChanged()
+        }
+
+        employeeViewModel.fetchAllCarsFromServer()
     }
 
 
     private fun renderState(state: CarState) {
         when (state) {
             is CarState.Success -> {
-                adapter.submitList(state.cars)
+//                adapter.submitList(state.cars)
+                employeeViewModel.allCars = state.cars
+                employeeViewModel.loadPagination(true)
             }
             is CarState.DataFetched -> {
                 Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_SHORT).show()
