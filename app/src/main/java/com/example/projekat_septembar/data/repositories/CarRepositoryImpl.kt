@@ -4,7 +4,7 @@ import com.example.projekat_septembar.data.datasources.local.CarDao
 import com.example.projekat_septembar.data.datasources.remote.CarDataSource
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.data.models.CarEntity
-import com.example.projekat_septembar.data.models.Resource
+import com.example.projekat_septembar.data.models.SellerDetails
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -27,6 +27,20 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
                         availability = carResponse.availability,
                     )
                 }
+            }
+    }
+
+    override fun contactSeller(id: Long): Observable<SellerDetails> {
+        return remoteDataSource
+            .getSeller("api/users/$id")
+            .map {
+                SellerDetails(
+                    first_name = it.User.first_name,
+                    last_name = it.User.last_name,
+                    phone = it.User.phone,
+                    avatar = it.User.avatar,
+                    email = it.User.email,
+                )
             }
     }
 

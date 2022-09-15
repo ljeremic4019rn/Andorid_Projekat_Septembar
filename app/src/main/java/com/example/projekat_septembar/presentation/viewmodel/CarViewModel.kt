@@ -3,6 +3,7 @@ package com.example.projekat_septembar.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projekat_septembar.data.models.Car
+import com.example.projekat_septembar.data.models.SellerDetails
 import com.example.projekat_septembar.data.repositories.CarRepository
 import com.example.projekat_septembar.presentation.contract.CarContract
 import com.example.projekat_septembar.presentation.view.states.CarState
@@ -16,7 +17,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
     private val subscriptions = CompositeDisposable()
     override val carState: MutableLiveData<CarState> = MutableLiveData()
     override val paginationList: MutableLiveData<List<Car>> = MutableLiveData()
-
+    override val contactedSeller: MutableLiveData<SellerDetails> = MutableLiveData()
     override var allCars: List<Car> = arrayListOf()
     private var size = 0
 
@@ -64,6 +65,22 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
                 {
                     carState.value = CarState.Saved("Car has been saved")
                     Timber.e("Saved Car")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun getSeller(id: Long) {
+        val subscription = carRepository
+            .contactSeller(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    contactedSeller.value = it
                 },
                 {
                     Timber.e(it)

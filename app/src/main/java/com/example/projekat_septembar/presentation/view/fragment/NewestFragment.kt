@@ -1,6 +1,7 @@
 package com.example.projekat_septembar.presentation.view.fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -19,8 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekat_septembar.R
 import com.example.projekat_septembar.data.models.Car
+import com.example.projekat_septembar.data.models.SellerDetails
 import com.example.projekat_septembar.databinding.FragmentNewestBinding
 import com.example.projekat_septembar.presentation.contract.CarContract
+import com.example.projekat_septembar.presentation.view.activity.ContactSellerActivity
 import com.example.projekat_septembar.presentation.view.recycler.adapters.CarAdapter
 import com.example.projekat_septembar.presentation.view.states.CarState
 import com.example.projekat_septembar.presentation.viewmodel.CarViewModel
@@ -102,7 +105,7 @@ class NewestFragment: Fragment() {
             }
 
             when(radioButton.text.toString()){
-                "Contact seller" -> println("contact button")
+                "Contact seller" -> carViewModel.getSeller(car.id)
                 "Save" -> carViewModel.saveCar(car)
                 else -> println("error")
             }
@@ -113,23 +116,24 @@ class NewestFragment: Fragment() {
         builder.show()
     }
 
-    private fun startUpdateActivity(id: Long) {
-//        val intent = Intent(activity, UpdateEmployeeActivity::class.java)
-//        intent.putExtra("id", id)
-//        doAction.launch(intent)
+    private fun startContactSellerActivity(sellerDetails: SellerDetails?) {
+        val intent = Intent(activity, ContactSellerActivity::class.java)
+        intent.putExtra("seller", sellerDetails)
+        doAction.launch(intent)
     }
 
     private val doAction: ActivityResultLauncher<Intent> = registerForActivityResult( ActivityResultContracts.StartActivityForResult()) {
-//        if (it.resultCode == Activity.RESULT_OK) {
-//            val data = it.data!!
-//
-//            val id = data.getLongExtra("id",0)
-//            val newName = data.getStringExtra("name")!!
-//            val newSalary = data.getIntExtra("salary",0)
-//            val newAge = data.getIntExtra("age",0)
-//
-//            employeeViewModel.updateEmployee(id,newName,newSalary,newAge)
-//        }
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data = it.data!!
+
+
+            println("kurac")
+            println( data.getStringExtra("name")!!)
+            println( data.getStringExtra("lastname")!!)
+            println( data.getIntExtra("phone",0))
+
+
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -137,6 +141,10 @@ class NewestFragment: Fragment() {
         carViewModel.carState.observe(viewLifecycleOwner) { carState ->
             Timber.e(carState.toString())
             renderState(carState)
+        }
+
+        carViewModel.contactedSeller.observe(viewLifecycleOwner) {
+            startContactSellerActivity(carViewModel.contactedSeller.value)
         }
 
         carViewModel.paginationList.observe(viewLifecycleOwner) {
