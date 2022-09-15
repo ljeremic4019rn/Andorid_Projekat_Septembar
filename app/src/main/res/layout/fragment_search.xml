@@ -6,14 +6,84 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRv"
+        android:layout_width="408dp"
+        android:layout_height="532dp"
+        android:scrollbarSize="25dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="209dp"
+        android:layout_height="56dp"
+        android:ems="10"
+        android:hint="@string/search"
+        android:inputType="textPersonName"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintBottom_toBottomOf="@+id/searchRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/searchRadioGroup"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:text="@string/search"
+        app:layout_constraintEnd_toEndOf="@+id/searchEt"
+        app:layout_constraintStart_toStartOf="@+id/searchEt"
+        app:layout_constraintTop_toBottomOf="@+id/searchEt" />
+
+    <RadioGroup
+        android:id="@+id/searchRadioGroup"
+        android:layout_width="166dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RadioButton
+            android:id="@+id/nameRb"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:buttonTint="#1A99C4"
+            android:text="@string/search_by_name" />
+
+        <RadioButton
+            android:id="@+id/modelRb"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:buttonTint="#1A99C4"
+            android:text="@string/search_by_model"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="54dp" />
+
+        <RadioButton
+            android:id="@+id/colorRb"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:buttonTint="#1A99C4"
+            android:text="@string/search_by_color"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="54dp" />
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import com.example.projekat_septembar.data.models.SellerDetails
 import com.example.projekat_septembar.data.models.serverRequests.ContactSellerRequest
 import io.reactivex.Completable
 import io.reactivex.Observable
+import timber.log.Timber
 
 class CarRepositoryImpl (private val localDataSource: CarDao, private val remoteDataSource: CarDataSource) : CarRepository {
 
@@ -53,6 +54,36 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
                 Resource.Success(Unit)
             }
     }
+
+    override fun search(type: String, key: String): Observable<List<Car>> {
+
+        var searchUrl: String = ""
+
+        when(type){
+            "name" -> searchUrl = "api/cars/name/$key"
+            "model" -> searchUrl = "api/cars/model/$key"
+            "color" -> searchUrl = "api/cars/color/$key"
+            else -> Timber.e("Error while searching")
+        }
+
+        return remoteDataSource
+            .searchCars(searchUrl)
+            .map {
+                it.Cars.map { carResponse ->
+                    Car(
+                        id = carResponse.id,
+                        car = carResponse.car,
+                        car_model = carResponse.car_model,
+                        car_color = carResponse.car_color,
+                        car_model_year = carResponse.car_model_year,
+                        car_vin = carResponse.car_vin,
+                        price = carResponse.price,
+                        availability = carResponse.availability,
+                    )
+                }
+            }
+    }
+
 
     override fun saveCarToDb(car: Car): Completable {
         return localDataSource.insert(CarEntity(

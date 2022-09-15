@@ -2,6 +2,7 @@ package com.example.projekat_septembar.data.datasources.remote
 
 import com.example.projekat_septembar.data.models.serverRequests.ContactSellerRequest
 import com.example.projekat_septembar.data.models.serverResponses.GetCarsResponse
+import com.example.projekat_septembar.data.models.serverResponses.GetSearchCarsResponse
 import com.example.projekat_septembar.data.models.serverResponses.GetSellerResponse
 import com.example.projekat_septembar.data.models.serverResponses.SellerDetailsResponse
 import io.reactivex.Observable
@@ -20,5 +21,9 @@ interface CarDataSource {
 
     @POST("api/contactus")
     fun contactSeller(@Body contactSellerRequest: ContactSellerRequest): Observable<Any>
+
+    @GET()
+    fun searchCars(@Url url: String?): Observable<GetSearchCarsResponse>
+
 
 }

@@ -14,7 +14,6 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), CarContract.ViewModel {
-
     private val subscriptions = CompositeDisposable()
     override val carState: MutableLiveData<CarState> = MutableLiveData()
     override val paginationList: MutableLiveData<List<Car>> = MutableLiveData()
@@ -55,6 +54,23 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
                 tmpArrayList.add(allCars[i])
             paginationList.value = tmpArrayList
         }
+    }
+
+    override fun search(type: String, key: String) {
+        val subscription = carRepository
+            .search(type, key)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    carState.value = CarState.Searched(it)
+                },
+                {
+                    carState.value = CarState.Error("Error happened while fetching data from the server")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
     }
 
     override fun saveCar(car: Car) {

@@ -11,6 +11,7 @@ interface CarRepository {
     fun fetchAllFromServer(): Observable<List<Car>>
     fun getSeller(id: Long): Observable<SellerDetails>
     fun contactSeller(firstname: String, lastname: String, message: String, contact: Int): Observable<Resource<Unit>>
+    fun search(type: String, key: String): Observable<List<Car>>
 
     fun saveCarToDb(car: Car): Completable
 }

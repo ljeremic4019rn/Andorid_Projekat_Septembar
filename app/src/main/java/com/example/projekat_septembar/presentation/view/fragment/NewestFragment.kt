@@ -88,7 +88,7 @@ class NewestFragment: Fragment() {
 
         val  cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
         val  okBtn = view.findViewById<Button>(R.id.okBtn)
-        val  radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        val  radioGroup = view.findViewById<RadioGroup>(R.id.searchRadioGroup)
 
         builder.setView(view)
 
@@ -97,7 +97,7 @@ class NewestFragment: Fragment() {
         }
 
         okBtn.setOnClickListener {
-            val radioButton =view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+            val radioButton = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
 
             if (radioButton == null) {
                 Toast.makeText(context, "Please select option", Toast.LENGTH_SHORT).show()
