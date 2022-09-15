@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.projekat_septembar.presentation.view.recycler.adapter.NonScrollableViewAdapter
+    <com.example.projekat_septembar.presentation.view.recycler.adapters.NonScrollableViewAdapter
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="0dp">
-    </com.example.projekat_septembar.presentation.view.recycler.adapter.NonScrollableViewAdapter>
+    </com.example.projekat_septembar.presentation.view.recycler.adapters.NonScrollableViewAdapter>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

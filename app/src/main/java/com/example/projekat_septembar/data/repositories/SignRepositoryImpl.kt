@@ -6,7 +6,7 @@ import com.example.projekat_septembar.data.models.serverRequests.SignUpRequest
 import com.example.projekat_septembar.data.models.serverResponses.UserDetails
 import io.reactivex.Observable
 
-class SignRepoImpl (private val signDataSource: SignDataSource): SignRepository {
+class SignRepositoryImpl (private val signDataSource: SignDataSource): SignRepository {
 
     override fun signIn(username: String, password: String): Observable<UserDetails> {
         return signDataSource

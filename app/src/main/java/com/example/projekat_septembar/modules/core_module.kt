@@ -3,6 +3,7 @@ package com.example.projekat_septembar.modules
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.example.projekat_septembar.data.datasources.local.CarDataBase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
@@ -23,10 +24,10 @@ val coreModule = module {
         androidApplication().getSharedPreferences(androidApplication().packageName, Context.MODE_PRIVATE)
     }
 
-//    single { Room.databaseBuilder(androidContext(), EmployeeDataBase::class.java, "employees").allowMainThreadQueries()
-//        .fallbackToDestructiveMigration()
-//        .build()
-//    }
+    single { Room.databaseBuilder(androidContext(), CarDataBase::class.java, "cars").allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build()
+    }
 
     single { createRetrofit(moshi = get(), httpClient = get()) }
 

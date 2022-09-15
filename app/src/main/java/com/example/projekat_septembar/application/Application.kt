@@ -29,8 +29,8 @@ class Application : Application() {
     private fun initKoin() {
         val modules = listOf(
             coreModule,
-            signInModule
-//            employee_module
+            signInModule,
+            car_module
         )
         startKoin {
             androidLogger(Level.ERROR)

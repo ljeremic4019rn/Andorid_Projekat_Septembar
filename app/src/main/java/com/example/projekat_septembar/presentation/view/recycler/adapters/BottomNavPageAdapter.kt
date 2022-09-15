@@ -1,4 +1,4 @@
-package com.example.projekat_septembar.presentation.view.recycler.adapter
+package com.example.projekat_septembar.presentation.view.recycler.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,4 +1,4 @@
-package com.example.projekat_septembar.presentation.view.recycler.adapter;
+package com.example.projekat_septembar.presentation.view.recycler.adapters;
 
 import android.content.Context;
 import android.util.AttributeSet;
