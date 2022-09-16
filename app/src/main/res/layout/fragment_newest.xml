@@ -10,7 +10,7 @@
         android:id="@+id/carRv"
         android:layout_width="409dp"
         android:layout_height="640dp"
-        android:scrollbarSize="25dp"
+        android:scrollbarSize="30dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

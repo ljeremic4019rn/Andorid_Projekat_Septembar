@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRv"
-        android:layout_width="408dp"
-        android:layout_height="500dp"
+        android:layout_width="413dp"
+        android:layout_height="473dp"
         android:scrollbarSize="25dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,22 +39,25 @@
         android:id="@+id/searchBtn"
         android:layout_width="134dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:text="@string/search"
         app:layout_constraintEnd_toEndOf="@+id/searchEt"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/searchEt"
         app:layout_constraintTop_toBottomOf="@+id/searchEt" />
 
     <RadioGroup
         android:id="@+id/searchRadioGroup"
-        android:layout_width="166dp"
-        android:layout_height="110dp"
+        android:layout_width="182dp"
+        android:layout_height="117dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
 
         <RadioButton
             android:id="@+id/nameRb"
@@ -84,16 +87,29 @@
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="54dp" />
 
-        <RadioButton
-            android:id="@+id/yearRb"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:buttonTint="#1A99C4"
+        <Switch
+            android:id="@+id/yearSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/search_by_year"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="54dp" />
+            tools:layout_editor_absoluteX="193dp"
+            tools:layout_editor_absoluteY="348dp" />
+
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/searchYearEt"
+        android:layout_width="65dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="@string/year"
+        android:inputType="textPersonName"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBtn"
+        app:layout_constraintEnd_toStartOf="@+id/searchBtn"
+        app:layout_constraintStart_toEndOf="@+id/searchRadioGroup"
+        app:layout_constraintTop_toTopOf="@+id/searchBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

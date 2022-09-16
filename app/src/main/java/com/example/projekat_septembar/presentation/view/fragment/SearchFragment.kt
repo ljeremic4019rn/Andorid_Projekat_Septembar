@@ -18,6 +18,7 @@ import com.example.projekat_septembar.presentation.viewmodel.CarViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
 
@@ -70,7 +71,7 @@ class SearchFragment : Fragment() {
                 "Search by name"  -> carViewModel.search("name", searchKey)
                 "Search by model" -> carViewModel.search("model", searchKey)
                 "Search by color" -> carViewModel.search("color", searchKey)
-                "Search by year"  -> carViewModel.search("year", searchKey)
+//                "Search by year"  -> carViewModel.search("year", searchKey)
                 else -> System.err.println("Error while inputting search")
             }
         }
@@ -86,7 +87,24 @@ class SearchFragment : Fragment() {
     private fun renderState(state: CarState) {
         when (state) {
             is CarState.Searched -> {
-                adapter.submitList(state.cars)
+
+                if(binding.yearSwitch.isChecked){
+
+                    if(binding.searchYearEt.text.toString() == ""){
+                       Toast.makeText(activity, "Please put in wanted year", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
+                    val year: Int = binding.searchYearEt.text.toString().toInt()
+                    val sortedList: ArrayList<Car> = arrayListOf()
+
+                    state.cars.forEach {
+                        if (it.car_model_year == year)
+                            sortedList.add(it)
+                    }
+                    adapter.submitList(sortedList)
+                }
+                else adapter.submitList(state.cars)
             }
         }
     }

@@ -62,7 +62,6 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
             "name" -> searchUrl = "api/cars/name/$key"
             "model" -> searchUrl = "api/cars/model/$key"
             "color" -> searchUrl = "api/cars/color/$key"
-            "year" -> searchUrl = "api/cars/year/$key"
             else -> Timber.e("Error while searching")
         }
 
