@@ -39,7 +39,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
         subscriptions.add(subscription)
     }
 
-    override fun loadPagination(initial: Boolean) {//todo ova funkija je ista kao kod krstica mozda posumnja da je kopirano, Mladenova odluka
+    override fun loadPagination(initial: Boolean) {//todo look into
         val tmpArrayList: ArrayList<Car> = arrayListOf()
         when {
             initial -> size = 9

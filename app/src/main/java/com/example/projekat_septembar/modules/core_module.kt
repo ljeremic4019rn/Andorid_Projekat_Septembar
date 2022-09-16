@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.projekat_septembar.data.datasources.local.CarDataBase
+import com.example.projekat_septembar.data.datasources.local.UserDataBase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
@@ -25,6 +26,11 @@ val coreModule = module {
     }
 
     single { Room.databaseBuilder(androidContext(), CarDataBase::class.java, "cars").allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build()
+    }
+
+    single { Room.databaseBuilder(androidContext(), UserDataBase::class.java, "users").allowMainThreadQueries()
         .fallbackToDestructiveMigration()
         .build()
     }

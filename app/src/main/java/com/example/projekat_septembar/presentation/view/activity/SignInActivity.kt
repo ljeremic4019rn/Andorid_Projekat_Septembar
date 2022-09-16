@@ -63,10 +63,9 @@ class SignInActivity : AppCompatActivity() {
         when (state) {
             is SignInState.Success -> {
 
-                println("successful sigh in")
-                Toast.makeText(this, "Successfully logged in", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Successfully signed in", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, SplashActivity::class.java)//todo popravi da se pojavi splash
+                val intent = Intent(this, MainActivity::class.java)//todo popravi da se pojavi splash
                 startActivity(intent)
                 finish()
 

@@ -9,15 +9,15 @@ import com.example.projekat_septembar.R
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
 
         splashScreen.setKeepOnScreenCondition {
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
-
 
             finish()
             false
@@ -25,4 +25,5 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
     }
+
 }

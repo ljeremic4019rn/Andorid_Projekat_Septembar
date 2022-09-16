@@ -2,8 +2,11 @@ package com.example.projekat_septembar.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.projekat_septembar.data.models.Resource
+import com.example.projekat_septembar.data.models.UserEntity
 import com.example.projekat_septembar.data.repositories.SignRepository
 import com.example.projekat_septembar.presentation.contract.SignContract
+import com.example.projekat_septembar.presentation.view.states.CarState
 import com.example.projekat_septembar.presentation.view.states.SignInState
 import com.example.projekat_septembar.presentation.view.states.SignUpState
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -58,9 +61,46 @@ class SignViewModel(private val signRepository: SignRepository) : ViewModel(), S
                     Timber.e("Completed")
                 }
             )
-
         subscriptions.add(subscription)
-        return true    }
+        return true
+    }
+
+    override fun registerUser(name: String, lastname: String, country: String, phone: Long) {
+        val subscription = signRepository
+            .registerUser(name, lastname, country, phone)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                   Timber.e("User registered")
+                    signUp(name, lastname, phone, country)
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun checkByCredentials(name: String,lastname: String,country: String,phone: Long) {
+        var once = true//sluzi da zaustavi ponovno okidanje jer se izvrsava jos jednom nakon promene u bazi
+        val subscription = signRepository
+            .checkByCredentials(name, lastname, country, phone)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (once){
+                        signUpState.value = SignUpState.RegisterCheck(it)
+                        once = false
+                    }
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
 
     override fun onCleared() {
         super.onCleared()

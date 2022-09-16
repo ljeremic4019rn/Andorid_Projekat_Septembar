@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projekat_septembar.databinding.ActivitySighUpBinding
 import com.example.projekat_septembar.presentation.contract.SignContract
-import com.example.projekat_septembar.presentation.view.states.SignInState
 import com.example.projekat_septembar.presentation.view.states.SignUpState
 import com.example.projekat_septembar.presentation.viewmodel.SignViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,9 +50,10 @@ class SignUpActivity : AppCompatActivity() {
             if(firstname.isBlank() || lastname.isBlank() || country.isBlank()){
                 Toast.makeText(applicationContext,"Fields can not be empty", Toast.LENGTH_SHORT).show()
             }else {
-                signViewModel.signUp(firstname, lastname, phone, country)
+                signViewModel.checkByCredentials(firstname, lastname, country, phone)
             }
-        }    }
+        }
+    }
 
     private fun initObservers(){
         signViewModel.signUpState.observe(this) {
@@ -65,19 +65,19 @@ class SignUpActivity : AppCompatActivity() {
     private fun startSignInActivity(state: SignUpState) {
         when (state) {
             is SignUpState.Success -> {
-
-                println("successful sigh up")
                 Toast.makeText(this, state.singUpResponse, Toast.LENGTH_SHORT).show()
-
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
-
             }
             is SignUpState.Error -> {
                 Toast.makeText(this, "Wrong data entered", Toast.LENGTH_SHORT).show()
             }
-            is SignUpState.DataFetched -> {
+            is SignUpState.RegisterCheck -> {
+               if(state.found == 0) signViewModel.registerUser(firstname, lastname, country, phone)
+               else Toast.makeText(this, "User already exists", Toast.LENGTH_SHORT).show()
+            }
+                is SignUpState.DataFetched -> {
                 Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_SHORT)
                     .show()
             }

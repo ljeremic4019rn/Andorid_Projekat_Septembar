@@ -3,6 +3,7 @@ package com.example.projekat_septembar.data.repositories
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.data.models.Resource
 import com.example.projekat_septembar.data.models.SellerDetails
+import com.example.projekat_septembar.data.models.UserEntity
 import io.reactivex.Observable
 import io.reactivex.Completable
 
@@ -16,5 +17,6 @@ interface CarRepository {
     fun saveCarToDb(car: Car): Completable
     fun getAllCars(): Observable<List<Car>>
     fun deleteById(id: Long): Completable
+
 
 }
