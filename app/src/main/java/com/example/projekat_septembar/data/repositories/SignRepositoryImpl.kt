@@ -1,17 +1,14 @@
 package com.example.projekat_septembar.data.repositories
 
 import android.annotation.SuppressLint
-import com.example.projekat_septembar.data.datasources.local.CarDao
 import com.example.projekat_septembar.data.datasources.local.UserDao
 import com.example.projekat_septembar.data.datasources.remote.SignDataSource
-import com.example.projekat_septembar.data.models.Resource
 import com.example.projekat_septembar.data.models.UserEntity
 import com.example.projekat_septembar.data.models.serverRequests.SignInRequest
 import com.example.projekat_septembar.data.models.serverRequests.SignUpRequest
 import com.example.projekat_septembar.data.models.serverResponses.UserDetails
 import io.reactivex.Completable
 import io.reactivex.Observable
-import timber.log.Timber
 
 class SignRepositoryImpl (private val localDataSource: UserDao,  private val signDataSource: SignDataSource): SignRepository {
 

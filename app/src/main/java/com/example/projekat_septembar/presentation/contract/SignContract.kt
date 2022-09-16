@@ -1,12 +1,8 @@
 package com.example.projekat_septembar.presentation.contract
 
 import androidx.lifecycle.LiveData
-import com.example.projekat_septembar.data.models.UserEntity
-import com.example.projekat_septembar.presentation.view.states.CarState
 import com.example.projekat_septembar.presentation.view.states.SignInState
 import com.example.projekat_septembar.presentation.view.states.SignUpState
-import io.reactivex.Completable
-import io.reactivex.Observable
 
 interface SignContract {
 

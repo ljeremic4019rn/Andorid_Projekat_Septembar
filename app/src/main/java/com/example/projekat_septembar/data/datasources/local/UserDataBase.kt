@@ -10,7 +10,7 @@ import com.example.projekat_septembar.data.models.UserEntity
     version = 1,
     exportSchema = false
 )
-@TypeConverters()
+@TypeConverters
 abstract class UserDataBase : RoomDatabase() {
     abstract fun getUserDao(): UserDao
 

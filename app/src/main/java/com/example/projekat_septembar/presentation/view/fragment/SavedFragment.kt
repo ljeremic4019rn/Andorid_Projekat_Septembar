@@ -1,6 +1,5 @@
 package com.example.projekat_septembar.presentation.view.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -63,7 +62,7 @@ class SavedFragment : Fragment() {
         carViewModel.getAll()
     }
 
-    var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
+    private var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
         ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.DOWN or ItemTouchHelper.UP) {
         override fun onMove(recyclerView: RecyclerView,viewHolder: RecyclerView.ViewHolder,target: RecyclerView.ViewHolder): Boolean {
             println("ON MOVE")
@@ -93,6 +92,7 @@ class SavedFragment : Fragment() {
             is CarState.LocalSuccess -> {
                 adapter.submitList(state.cars)
             }
+            else -> Timber.e("Error")
         }
     }
 

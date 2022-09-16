@@ -1,7 +1,5 @@
 package com.example.projekat_septembar.data.repositories
 
-import com.example.projekat_septembar.data.models.Resource
-import com.example.projekat_septembar.data.models.UserEntity
 import com.example.projekat_septembar.data.models.serverResponses.UserDetails
 import io.reactivex.Completable
 import io.reactivex.Observable

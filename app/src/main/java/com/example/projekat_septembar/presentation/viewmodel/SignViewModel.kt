@@ -2,11 +2,8 @@ package com.example.projekat_septembar.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projekat_septembar.data.models.Resource
-import com.example.projekat_septembar.data.models.UserEntity
 import com.example.projekat_septembar.data.repositories.SignRepository
 import com.example.projekat_septembar.presentation.contract.SignContract
-import com.example.projekat_septembar.presentation.view.states.CarState
 import com.example.projekat_septembar.presentation.view.states.SignInState
 import com.example.projekat_septembar.presentation.view.states.SignUpState
 import io.reactivex.android.schedulers.AndroidSchedulers

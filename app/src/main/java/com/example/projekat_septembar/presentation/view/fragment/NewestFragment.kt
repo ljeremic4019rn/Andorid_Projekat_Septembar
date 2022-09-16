@@ -173,6 +173,7 @@ class NewestFragment: Fragment() {
             is CarState.Contacted -> {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
+            else -> Timber.e("Error")
         }
     }
 

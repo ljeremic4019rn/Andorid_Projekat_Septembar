@@ -106,10 +106,11 @@ class SearchFragment : Fragment() {
                 }
                 else adapter.submitList(state.cars)
             }
+            else -> Timber.e("Error")
         }
     }
 
-    fun capitalize(str: String): String {
+    private fun capitalize(str: String): String {
         return str.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 }

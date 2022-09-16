@@ -11,7 +11,7 @@ import com.example.projekat_septembar.data.models.CarEntity
     version = 1,
     exportSchema = false
 )
-@TypeConverters()
+@TypeConverters
 abstract class CarDataBase : RoomDatabase() {
     abstract fun getCarDao(): CarDao
 }

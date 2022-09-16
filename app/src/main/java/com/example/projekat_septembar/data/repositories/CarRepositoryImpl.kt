@@ -56,7 +56,7 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
 
     override fun search(type: String, key: String): Observable<List<Car>> {
 
-        var searchUrl: String = ""
+        var searchUrl = ""
 
         when(type){
             "name" -> searchUrl = "api/cars/name/$key"

@@ -4,7 +4,6 @@ import com.example.projekat_septembar.data.models.serverRequests.ContactSellerRe
 import com.example.projekat_septembar.data.models.serverResponses.GetCarsResponse
 import com.example.projekat_septembar.data.models.serverResponses.GetSearchCarsResponse
 import com.example.projekat_septembar.data.models.serverResponses.GetSellerResponse
-import com.example.projekat_septembar.data.models.serverResponses.SellerDetailsResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,7 +15,7 @@ interface CarDataSource {
     @GET("api/cars")
     fun fetchAll(): Observable<GetCarsResponse>
 
-    @GET()
+    @GET
     fun getSeller(@Url url: String?): Observable<GetSellerResponse>
 
     @POST("api/contactus")

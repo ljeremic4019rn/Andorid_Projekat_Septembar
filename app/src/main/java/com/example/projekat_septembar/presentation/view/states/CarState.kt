@@ -2,7 +2,6 @@ package com.example.projekat_septembar.presentation.view.states
 
 
 import com.example.projekat_septembar.data.models.Car
-import com.example.projekat_septembar.data.models.serverResponses.UserDetails
 
 sealed class CarState {
     object DataFetched: CarState()

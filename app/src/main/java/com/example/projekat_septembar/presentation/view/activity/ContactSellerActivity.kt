@@ -2,11 +2,8 @@ package com.example.projekat_septembar.presentation.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
-import com.example.projekat_septembar.R
 import com.example.projekat_septembar.data.models.SellerDetails
 import com.example.projekat_septembar.databinding.ActivityContactSellerBinding
 import com.squareup.picasso.Picasso

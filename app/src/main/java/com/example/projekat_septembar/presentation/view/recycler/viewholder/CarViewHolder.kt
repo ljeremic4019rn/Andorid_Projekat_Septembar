@@ -1,7 +1,6 @@
 package com.example.projekat_septembar.presentation.view.recycler.viewholder
 
 import android.annotation.SuppressLint
-import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.databinding.CarItemBinding
