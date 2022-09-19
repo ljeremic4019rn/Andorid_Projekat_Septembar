@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity() {
             if(username.isBlank() || password.isBlank()){
                 Toast.makeText(applicationContext,"All fields must be filled", Toast.LENGTH_SHORT).show()
             }else {
-                signViewModel.signIn(username, password)
+                signViewModel.checkSignIn(username, password)
             }
         }
 
@@ -61,16 +61,17 @@ class SignInActivity : AppCompatActivity() {
     private fun startMainActivity(state: SignInState) {
         when (state) {
             is SignInState.Success -> {
-
                 Toast.makeText(this, "Successfully signed in", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, MainActivity::class.java)//todo popravi da se pojavi splash
                 startActivity(intent)
                 finish()
-
             }
             is SignInState.Error -> {
                 Toast.makeText(this, "Wrong data entered", Toast.LENGTH_SHORT).show()
+            }
+            is SignInState.Existing -> {
+                Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
             }
             is SignInState.DataFetched -> {
                 Toast.makeText(this, "Fresh data fetched from the server", Toast.LENGTH_SHORT)

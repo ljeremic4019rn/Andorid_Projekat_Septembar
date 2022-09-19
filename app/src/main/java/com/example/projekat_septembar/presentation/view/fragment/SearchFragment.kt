@@ -71,7 +71,6 @@ class SearchFragment : Fragment() {
                 "Search by name"  -> carViewModel.search("name", searchKey)
                 "Search by model" -> carViewModel.search("model", searchKey)
                 "Search by color" -> carViewModel.search("color", searchKey)
-//                "Search by year"  -> carViewModel.search("year", searchKey)
                 else -> System.err.println("Error while inputting search")
             }
         }

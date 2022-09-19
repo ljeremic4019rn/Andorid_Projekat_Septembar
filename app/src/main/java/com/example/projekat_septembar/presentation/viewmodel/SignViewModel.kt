@@ -62,9 +62,26 @@ class SignViewModel(private val signRepository: SignRepository) : ViewModel(), S
         return true
     }
 
-    override fun registerUser(name: String, lastname: String, country: String, phone: Long) {
+    override fun checkSignIn(username: String, password: String) {
         val subscription = signRepository
-            .registerUser(name, lastname, country, phone)
+            .checkSignIn(username, password)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                   if (it != 0) signIn(username, password)
+                    else signInState.value = SignInState.Existing("You have entered wrong credentials")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun registerUser(username: String,password: String, name: String, lastname: String, country: String, phone: Long) {
+        val subscription = signRepository
+            .registerUser(username, password, name, lastname, country, phone)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -79,10 +96,10 @@ class SignViewModel(private val signRepository: SignRepository) : ViewModel(), S
         subscriptions.add(subscription)
     }
 
-    override fun checkByCredentials(name: String,lastname: String,country: String,phone: Long) {
+    override fun checkByCredentials(username: String, name: String,lastname: String,country: String,phone: Long) {
         var once = true//sluzi da zaustavi ponovno okidanje jer se izvrsava jos jednom nakon promene u bazi
         val subscription = signRepository
-            .checkByCredentials(name, lastname, country, phone)
+            .checkByCredentials(username, name, lastname, country, phone)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

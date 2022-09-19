@@ -14,7 +14,9 @@ abstract class UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(userEntity: UserEntity): Completable
 
-    @Query("SELECT COUNT(*) FROM users WHERE name == :name and lastname == :lastname and phone == :phone and country == :country ")
-    abstract fun getByCredentials(name: String, lastname: String, country: String, phone: Long): Observable<Int>
+    @Query("SELECT COUNT(*) FROM users WHERE username == :username and name == :name and lastname == :lastname and phone == :phone and country == :country ")
+    abstract fun getByCredentials(username: String, name: String, lastname: String, country: String, phone: Long): Observable<Int>
 
+    @Query("SELECT COUNT(*) FROM users WHERE username == :username and password == :password")
+    abstract fun checkSignIn(username: String, password: String): Observable<Int>
 }

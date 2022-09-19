@@ -36,14 +36,17 @@ class SignRepositoryImpl (private val localDataSource: UserDao,  private val sig
             }
     }
 
-    override fun registerUser(name: String, lastname: String, country: String, phone: Long): Completable {
-        return localDataSource.insert(UserEntity(name,lastname, phone, country))
+    override fun registerUser(username: String,password: String, name: String, lastname: String, country: String, phone: Long): Completable {
+        return localDataSource.insert(UserEntity(username,password,name,lastname, phone, country))
     }
 
     @SuppressLint("CheckResult")
-    override fun checkByCredentials(name: String, lastname: String, country: String, phone: Long): Observable<Int> {
-      return localDataSource.getByCredentials(name, lastname, country, phone)
+    override fun checkByCredentials(username: String, name: String, lastname: String, country: String, phone: Long): Observable<Int> {
+      return localDataSource.getByCredentials(username, name, lastname, country, phone)
     }
 
+    override fun checkSignIn(username: String, password: String): Observable<Int> {
+        return localDataSource.checkSignIn(username, password)
+    }
 
 }

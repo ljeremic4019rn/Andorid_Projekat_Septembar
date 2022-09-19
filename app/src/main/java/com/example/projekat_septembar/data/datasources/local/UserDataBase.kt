@@ -7,7 +7,7 @@ import com.example.projekat_septembar.data.models.UserEntity
 
 @Database(
     entities = [UserEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters

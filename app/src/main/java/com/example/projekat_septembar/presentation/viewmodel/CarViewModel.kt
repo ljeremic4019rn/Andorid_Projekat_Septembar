@@ -39,7 +39,7 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
         subscriptions.add(subscription)
     }
 
-    override fun loadPagination(initial: Boolean) {//todo look into
+    override fun loadPagination(initial: Boolean) {//todo stavi if, uradi sort liste sa save, login da proveri bazu
         val tmpArrayList: ArrayList<Car> = arrayListOf()
         when {
             initial -> size = 9

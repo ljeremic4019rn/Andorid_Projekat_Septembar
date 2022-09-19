@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projekat_septembar.data.models.Car
 import com.example.projekat_septembar.databinding.CarItemBinding
 
-class CarViewHolder (private val itemBinding: CarItemBinding, val openDetailed: (position: Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root){
+class CarViewHolder (private val itemBinding: CarItemBinding, val onClick: (position: Int) -> Unit) : RecyclerView.ViewHolder(itemBinding.root){
 
     init {
         itemBinding.root.setOnClickListener {
-            openDetailed(layoutPosition)
+            onClick(layoutPosition)
         }
     }
 

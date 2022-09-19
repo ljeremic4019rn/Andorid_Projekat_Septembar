@@ -13,7 +13,8 @@ interface SignContract {
         fun signIn(username: String, password: String): Boolean
         fun signUp(name: String, lastname: String, phone: Long ,country: String): Boolean
 
-        fun registerUser(name: String, lastname: String, country: String, phone: Long)
-        fun checkByCredentials(name: String, lastname: String, country: String, phone: Long)
+        fun checkSignIn(username: String, password: String)
+        fun registerUser(username: String,password: String, name: String, lastname: String, country: String, phone: Long)
+        fun checkByCredentials(username: String, name: String, lastname: String, country: String, phone: Long)
     }
 }

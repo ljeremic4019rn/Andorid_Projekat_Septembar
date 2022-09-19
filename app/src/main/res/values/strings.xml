@@ -30,4 +30,7 @@
     <string name="search_by_color">Search by color</string>
     <string name="search_by_year">Search by year</string>
     <string name="year">Year</string>
+    <string name="lastname">Lastname</string>
+    <string name="phone_number">Phone_number</string>
+    <string name="country">Country</string>
 </resources>

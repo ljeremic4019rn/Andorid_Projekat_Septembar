@@ -17,6 +17,8 @@ class SignUpActivity : AppCompatActivity() {
     private val signViewModel: SignContract.SignViewModel by viewModel<SignViewModel>()
     private lateinit var binding: ActivitySighUpBinding
 
+    private var username: String = ""
+    private var password: String = ""
     private var firstname: String = ""
     private var lastname: String = ""
     private var phone: Long = 0
@@ -40,6 +42,8 @@ class SignUpActivity : AppCompatActivity() {
     private fun initView() {
 
         binding.btnSignUpServer.setOnClickListener{
+            username = binding.inputUsernameReg.text.toString()
+            password = binding.inputPasswordReg.text.toString()
             firstname = binding.firstNameEt.text.toString()
             lastname = binding.lastNameEt.text.toString()
             phone = binding.phoneEt.text.toString().toLong()
@@ -47,10 +51,10 @@ class SignUpActivity : AppCompatActivity() {
 
 
 
-            if(firstname.isBlank() || lastname.isBlank() || country.isBlank()){
+            if(firstname.isBlank() || lastname.isBlank() || country.isBlank() || username.isBlank() || password.isBlank()){
                 Toast.makeText(applicationContext,"Fields can not be empty", Toast.LENGTH_SHORT).show()
             }else {
-                signViewModel.checkByCredentials(firstname, lastname, country, phone)
+                signViewModel.checkByCredentials(username, firstname, lastname, country, phone)
             }
         }
     }
@@ -74,7 +78,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Wrong data entered", Toast.LENGTH_SHORT).show()
             }
             is SignUpState.RegisterCheck -> {
-               if(state.found == 0) signViewModel.registerUser(firstname, lastname, country, phone)
+               if(state.found == 0) signViewModel.registerUser(username, password, firstname, lastname, country, phone)
                else Toast.makeText(this, "User already exists", Toast.LENGTH_SHORT).show()
             }
                 is SignUpState.DataFetched -> {
