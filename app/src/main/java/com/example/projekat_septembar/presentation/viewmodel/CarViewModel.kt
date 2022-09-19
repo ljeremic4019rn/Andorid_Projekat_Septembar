@@ -40,19 +40,23 @@ class CarViewModel  (private val carRepository: CarRepository ) : ViewModel(), C
     }
 
     override fun loadPagination(initial: Boolean) {//todo stavi if, uradi sort liste sa save, login da proveri bazu
-        val tmpArrayList: ArrayList<Car> = arrayListOf()
-        when {
-            initial -> size = 9
-            size + 10 <= allCars.size -> size += 10
-            else -> size += (allCars.size - size)
+        val holderList: ArrayList<Car> = arrayListOf()
+
+        if(initial){
+            size = 9
+        }
+        else if (size + 10 <= allCars.size){
+            size += 10
+        }
+        else{
+            size += (allCars.size - size)
         }
 
-        println("counter $size list ${allCars.size}")
-
         if (size <= allCars.size) {
-            for (i in 0 until size)
-                tmpArrayList.add(allCars[i])
-            paginationList.value = tmpArrayList
+            for (i in 0 until size) {
+                holderList.add(allCars[i])
+            }
+            paginationList.value = holderList
         }
     }
 

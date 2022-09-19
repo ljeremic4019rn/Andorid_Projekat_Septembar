@@ -8,7 +8,7 @@ import com.example.projekat_septembar.data.models.CarEntity
 
 @Database(
     entities = [CarEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters

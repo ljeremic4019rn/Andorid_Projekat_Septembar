@@ -86,7 +86,7 @@ class CarRepositoryImpl (private val localDataSource: CarDao, private val remote
 
     override fun saveCarToDb(car: Car): Completable {
         return localDataSource.insert(CarEntity(
-            car.id,
+            0,
             car.car,
             car.car_model,
             car.car_color,
